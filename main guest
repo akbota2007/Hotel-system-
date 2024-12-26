@@ -1,0 +1,109 @@
+public class Main {
+    public static void main(String[] args) {
+        // Create rooms
+        Room room1 = new Room(101, "Single", 50.0);
+        Room room2 = new Room(102, "Double", 80.0);
+
+        // Create guests
+        Guest guest1 = new Guest("Alice", "123-456-7890");
+        Guest guest2 = new Guest("Bob", "098-765-4321");
+
+        // Create bookings
+        Booking booking1 = new Booking(room1, guest1, 3);
+        Booking booking2 = new Booking(room2, guest2, 2);
+
+        // Output bookings
+        System.out.println(booking1);
+        System.out.println(booking2);
+
+        // Compare two bookings (example comparison by total cost)
+        if (booking1.calculateTotalCost() > booking2.calculateTotalCost()) {
+            System.out.println(guest1.getName() + " has a more expensive booking.");
+        } else {
+            System.out.println(guest2.getName() + " has a more expensive booking.");
+        }
+    }
+}
+// Guest.java
+public class Guest {
+    private String name;
+    private String phoneNumber;
+
+    // Constructor
+    public Guest(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    // ToString method
+    @Override
+    public String toString() {
+        return "Guest: " + name + " (" + phoneNumber + ")";
+    }
+}
+// Booking.java
+public class Booking {
+    private Room room;
+    private Guest guest;
+    private int numberOfNights;
+
+    // Constructor
+    public Booking(Room room, Guest guest, int numberOfNights) {
+        this.room = room;
+        this.guest = guest;
+        this.numberOfNights = numberOfNights;
+    }
+
+    // Getters and Setters
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
+    }
+
+    public int getNumberOfNights() {
+        return numberOfNights;
+    }
+
+    public void setNumberOfNights(int numberOfNights) {
+        this.numberOfNights = numberOfNights;
+    }
+
+    // Calculate total cost
+    public double calculateTotalCost() {
+        return room.getPricePerNight() * numberOfNights;
+    }
+
+    // ToString method
+    @Override
+    public String toString() {
+        return guest + " booked " + room + " for " + numberOfNights + " nights. Total cost: $" + calculateTotalCost();
+    }
+}
